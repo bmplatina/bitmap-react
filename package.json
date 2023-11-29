@@ -1,7 +1,13 @@
 {
   "name": "bitmap-react",
   "version": "0.1.0",
-  "private": true,
+  "description": "Team Bitmap ESD",
+  "author": {
+    "name": "Platina",
+    "url": "http://prodbybitmap.com/"
+  },
+  "main": "./src/main/main.ts",
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -14,14 +20,16 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron": "wait-on http://localhost:3000 && electron .",
+    "compile-main": "tsc ./src/main/main.ts --outdir ./compile-main && tsc ./src/main/preload.ts --outdir ./compile-main",
+    "dev": "concurrently \"yarn start\" \"yarn electron\""
   },
   "eslintConfig": {
     "extends": [
@@ -40,5 +48,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^27.1.2",
+    "electron-builder": "^24.9.1",
+    "wait-on": "^7.2.0"
+  },
+  "type": "module"
 }
