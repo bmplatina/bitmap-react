@@ -6,7 +6,7 @@
     "name": "Platina",
     "url": "http://prodbybitmap.com/"
   },
-  "main": "./src/main/main.ts",
+  "main": "./compile-main/main.js",
   "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -29,7 +29,7 @@
     "eject": "react-scripts eject",
     "electron": "wait-on http://localhost:3000 && electron .",
     "compile-main": "tsc ./src/main/main.ts --outdir ./compile-main && tsc ./src/main/preload.ts --outdir ./compile-main",
-    "dev": "concurrently \"yarn start\" \"yarn electron\""
+    "dev": "concurrently \"yarn start\" \"compile-main\" \"yarn electron\""
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +55,5 @@
     "electron": "^27.1.2",
     "electron-builder": "^24.9.1",
     "wait-on": "^7.2.0"
-  },
-  "type": "module"
+  }
 }
