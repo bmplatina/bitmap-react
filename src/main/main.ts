@@ -2,7 +2,8 @@ import { BrowserWindow, app } from "electron";
 import * as path from "path";
 import * as isDev from "electron-is-dev";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL: string = "http://localhost:3000";
+const isMac: boolean = process.platform === "darwin";
 
 // BrowserWindow 객체는 전역으로 관리합니다.
 // 전역이 아닌 경우 자바스크립트 가비지 컬렉팅 발생 시 의도치 않게 browser window가 닫힐 수 있습니다.
@@ -11,12 +12,17 @@ let mainWindow: BrowserWindow | null = null;
 const createWindow = () => {
   // browser window를 생성합니다.
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    resizable: true,
+    width: 1600,
+    height: 900,
+    autoHideMenuBar: true,
+    fullscreenable: true,
+    titleBarStyle: "hiddenInset",
+    frame: isMac,
+    title: "Bitmap",
     webPreferences: {
       devTools: isDev,
       nodeIntegration: true,
+      contextIsolation: true,
       preload: path.join(__dirname, "preload.js"),
     },
   });

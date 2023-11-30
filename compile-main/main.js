@@ -1,23 +1,29 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var electron_1 = require("electron");
 var path = require("path");
 var isDev = require("electron-is-dev");
 var BASE_URL = "http://localhost:3000";
+var isMac = process.platform === "darwin";
 // BrowserWindow 객체는 전역으로 관리합니다.
 // 전역이 아닌 경우 자바스크립트 가비지 컬렉팅 발생 시 의도치 않게 browser window가 닫힐 수 있습니다.
 var mainWindow = null;
 var createWindow = function () {
     // browser window를 생성합니다.
     mainWindow = new electron_1.BrowserWindow({
-        width: 800,
-        height: 600,
-        resizable: true,
+        width: 1600,
+        height: 900,
+        autoHideMenuBar: true,
+        fullscreenable: true,
+        titleBarStyle: "hiddenInset",
+        frame: isMac,
+        title: "Bitmap",
         webPreferences: {
             devTools: isDev,
             nodeIntegration: true,
-            preload: path.join(__dirname, "preload.js"),
-        },
+            contextIsolation: true,
+            preload: path.join(__dirname, "preload.js")
+        }
     });
     // 앱의 index.html을 로드합니다.
     if (isDev) {
