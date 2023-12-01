@@ -3,11 +3,13 @@ exports.__esModule = true;
 var electron_1 = require("electron");
 var path = require("path");
 var isDev = require("electron-is-dev");
+var remote = require("@electron/remote/main");
 var BASE_URL = "http://localhost:3000";
 var isMac = process.platform === "darwin";
 // BrowserWindow 객체는 전역으로 관리합니다.
 // 전역이 아닌 경우 자바스크립트 가비지 컬렉팅 발생 시 의도치 않게 browser window가 닫힐 수 있습니다.
 var mainWindow = null;
+remote.initialize();
 var createWindow = function () {
     // browser window를 생성합니다.
     mainWindow = new electron_1.BrowserWindow({
@@ -35,6 +37,7 @@ var createWindow = function () {
         // 프로덕션 모드인 경우
         mainWindow.loadFile(path.join(__dirname, "./build/index.html")); //
     }
+    remote.enable(mainWindow.webContents);
 };
 // Electron이 준비되면 whenReady 메서드가 호출되어,
 // 초기화 및 browser window를 생성합니다.

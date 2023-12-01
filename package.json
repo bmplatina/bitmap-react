@@ -9,6 +9,8 @@
   "main": "./compile-main/main.js",
   "homepage": "./",
   "dependencies": {
+    "@electron/remote": "^2.1.0",
+    "@electron/universal": "^2.0.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.19",

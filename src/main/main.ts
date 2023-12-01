@@ -1,6 +1,7 @@
 import { BrowserWindow, app } from "electron";
 import * as path from "path";
 import * as isDev from "electron-is-dev";
+import * as remote from "@electron/remote/main";
 
 const BASE_URL: string = "http://localhost:3000";
 const isMac: boolean = process.platform === "darwin";
@@ -8,6 +9,8 @@ const isMac: boolean = process.platform === "darwin";
 // BrowserWindow 객체는 전역으로 관리합니다.
 // 전역이 아닌 경우 자바스크립트 가비지 컬렉팅 발생 시 의도치 않게 browser window가 닫힐 수 있습니다.
 let mainWindow: BrowserWindow | null = null;
+
+remote.initialize();
 
 const createWindow = () => {
   // browser window를 생성합니다.
@@ -36,6 +39,7 @@ const createWindow = () => {
     // 프로덕션 모드인 경우
     mainWindow.loadFile(path.join(__dirname, "./build/index.html")); //
   }
+  remote.enable(mainWindow.webContents);
 };
 
 // Electron이 준비되면 whenReady 메서드가 호출되어,
